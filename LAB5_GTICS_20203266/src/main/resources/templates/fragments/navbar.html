@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<div th:fragment="navbar">
+    <nav style="background-color: #343a40; padding: 1rem; color: white; display: flex; justify-content: space-between;">
+        <div>
+            <span style="font-weight: bold;">PUCP - GTICS LAB5</span>
+        </div>
+
+        <div>
+            <a th:href="@{/admin/usuarios}" sec:authorize="hasRole('ADMIN')" style="margin-right: 1rem; color: white;">Usuarios</a>
+            <a th:href="@{/user/juego}" sec:authorize="hasRole('USER')" style="margin-right: 1rem; color: white;">Juego</a>
+            <a th:href="@{/user/ultimas-partidas}" sec:authorize="hasRole('USER')" style="margin-right: 1rem; color: white;">Últimas Partidas</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <span th:text="${nombre} + ' (' + ${rol} + ')'" style="margin-right: 1rem;"></span>
+            <a th:href="@{/logout}" style="color: red;">Cerrar sesión</a>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
